@@ -15,7 +15,6 @@
 		<arg name="debug" value="true"/>
 		<arg name="gui" value="true"/>
 		<arg name="world_name" value="$(arg world_file)"/>
-		<arg name="verbose" value="true" />
 	</include>
 
 	<param name="robot_description" command="$(find xacro)/xacro.py $(find ackermann_car_description)/urdf/car.urdf.xacro" /> 
@@ -36,15 +35,5 @@
 
     <!--launch rviz-->
   	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find ackermann_car_description)/rviz/default.rviz" />
-
-	<!-- convert gps to utm  -->
-    <node name="gps_conv" pkg="gps_common" type="utm_odometry_node">
-        <!-- <remap from="odom" to="vo"/> -->
-        <remap from="fix" to="/gps/fix" />
-        <param name="rot_covariance" value="99999" />
-        <!-- <param name="frame_id" value="base_footprint" /> -->
-    </node>
-
-	<!-- <include file="$(find ackermann_car_description)/launch/move_base.launch" /> -->
 
 </launch>

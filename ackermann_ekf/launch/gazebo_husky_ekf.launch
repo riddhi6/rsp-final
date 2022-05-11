@@ -1,0 +1,28 @@
+<launch>
+    <!-- start ekf  -->
+    <node name="husky_ekf_node" pkg="robot_pose_ekf" 
+        type="robot_pose_ekf" 
+            output="screen">
+        <param name="output_frame" value="odom"/>
+        <param name="freq" value="30.0"/>
+        <param name="sensor_timeout" value="1.0"/>
+        <param name="odom_used" value="false"/>
+        <param name="imu_used" value="false"/>
+        <param name="vo_used" value="true"/>
+        <param name="debug" value="false"/>
+        <param name="self_diagnose" value="false"/>       
+        <remap from="/imu_data" to="/imu/data"/>
+    </node>
+    <!-- imu plugin publishes to /imu/data so no change -->
+    <!-- convert gps plugin to 3D odometery -->
+    <node name="sim_gps_conv" pkg="gps_common" type="utm_odometry_node">
+        <remap from="odom" to="vo"/>
+        <remap from="fix" to="/navsat/fix" />
+        <param name="rot_covariance" value="999" />
+        <param name="frame_id" value="base_footprint" />
+    </node>    
+
+    <include file="$(find husky_gazebo)/launch/husky_playpen.launch"/>
+    <include file="$(find husky_viz)/launch/view_robot.launch"/>
+</launch>
+

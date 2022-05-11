@@ -40,8 +40,7 @@ namespace gazebo {
 
 class AckermannSteer : public ModelPlugin {
   enum { FL, RL, RR, FR };
-//   enum {X, Y, Z};
-  int X=0, Y=0, Z=0;
+  enum {X, Y, Z};
   enum OdomSource {ENCODER, WORLD};
 
  public:

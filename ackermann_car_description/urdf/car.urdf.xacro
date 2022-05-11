@@ -30,16 +30,13 @@
 
 	<xacro:imu parent_link="$(arg parent_name)"/>
 	<xacro:gps parent_link="$(arg parent_name)"/>
-	<xacro:kinect parent_link = "$(arg car_name)_link_front"/>
-	<!-- <xacro:kinect parent_link = "$(arg parent_name)"/> -->
-	<!-- <xacro:hokuyo parent_link = "$(arg car_name)_link_front"/> -->
-	<!-- <xacro:hokuyo parent_link = "$(arg car_name)_link_0"/> -->
-	<xacro:hokuyo parent_link = "$(arg parent_name)"/>
+	<xacro:hokuyo parent_link = "$(arg car_name)_link_front"/>
+	<xacro:kinect parent_link = "$(arg parent_name)"/>
 
 	<gazebo>
       	<plugin name="ackermansteer" filename="libackermannsteer.so">
        		<debug>false</debug>
-         	<!-- * <commandTopic>rc1/spacenav/twist</commandTopic> -->
+         	<!-- <commandTopic>rc1/spacenav/twist</commandTopic> -->
          	<commandTopic>cmd_vel</commandTopic>
          	<odometryTopic>odom</odometryTopic>
          	<odometryFrame>$(arg parent_name)</odometryFrame>
