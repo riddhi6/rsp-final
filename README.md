@@ -1,2 +1,2 @@
 # rsp-final
-Path planning with ackerman car
+Path planning with ackermann car
