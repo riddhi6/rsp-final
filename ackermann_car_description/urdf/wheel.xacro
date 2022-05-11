@@ -1,0 +1,26 @@
+<robot name="wheels" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:macro name="wheela" params="parent_name wheel_name x_p y_p z_p row pitch yaw wheel_dia wheel_thickness wheel_mass wheel_velocity velocity_effort">
+		
+		<xacro:include filename="$(find ackermann_car_description)/urdf/objects.xacro"/>
+		<xacro:include filename="$(find ackermann_car_description)/urdf/transmission.xacro"/>
+
+		<xacro:wheel link_name="${wheel_name}" length="${wheel_thickness}" radius="${0.5*wheel_dia}" link_mass="${wheel_mass}"/>
+		<joint name="${wheel_name}_joint" type="continuous">
+			<origin xyz="${x_p} ${y_p} ${z_p}" rpy="${row} ${pitch} ${yaw}"/>
+			<parent link="${parent_name}"/>
+			<child link="${wheel_name}"/>
+			<axis xyz="0 1 0"/>
+			<limit velocity="${wheel_velocity}" effort="${velocity_effort}"/>
+			<!-- <xacro:if value="${mimic == 1}">
+				<mimic joint="${mimic_joint}"/>
+			</xacro:if> -->
+		</joint>
+
+		<xacro:transmission_def joint_name="${wheel_name}_joint" hardware_interface="VelocityJointInterface"/>
+		<!-- <xacro:transmission_def joint_name="${wheel_name}_joint" hardware_interface="EffortJointInterface"/> -->
+
+
+	</xacro:macro>
+
+</robot>

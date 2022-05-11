@@ -1,0 +1,93 @@
+<robot name="ackermannCar" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+	<xacro:property name="wheel_base" value="0.508"/>
+	<xacro:property name="wheel_seperation" value="0.366"/>
+	<xacro:property name="chassis_thickness" value="0.04"/>
+	<xacro:property name="chassis_mass" value="1.0"/>
+	<xacro:property name="wheel_dia" value="0.1524"/>
+	<xacro:property name="wheel_thickness" value="0.0675"/>
+	<xacro:property name="wheel_mass" value="0.1"/>
+	<xacro:property name="wheel_velocity" value="10"/>
+	<xacro:property name="steer_velocity" value="1.7"/>
+	<xacro:property name="steer_limit" value="1.0"/>
+	<!-- <xacro:property name="steer_limit" value="1.5708"/> -->
+	<xacro:property name="velocity_effort" value="5.0"/>
+	<xacro:property name="steer_effort" value="50.0"/>
+ 	 
+ 	<xacro:arg name="parent_name" default="base_link"/>
+ 	<xacro:arg name="car_name" default="rc1"/>
+
+ 	<link name="$(arg parent_name)"/>
+
+	<xacro:include filename="$(find ackermann_car_description)/urdf/iFrameChassis.xacro"/>
+	<xacro:include filename="$(find ackermann_car_description)/urdf/imu.gazebo"/>
+	<xacro:include filename="$(find ackermann_car_description)/urdf/gps.gazebo"/>
+	<xacro:include filename="$(find ackermann_car_description)/urdf/hokuyo.gazebo"/>
+	<xacro:include filename="$(find ackermann_car_description)/urdf/kinect.gazebo"/>
+
+	<xacro:iChassis parent_name="$(arg parent_name)" car_name="$(arg car_name)" wheel_base="${wheel_base}" wheel_seperation="${wheel_seperation}" chassis_thickness="${chassis_thickness}" chassis_mass="${chassis_mass}" wheel_dia="${wheel_dia}" steer_limit="${steer_limit}" steer_effort="${steer_effort}" steer_velocity="${steer_velocity}" wheel_thickness="${wheel_thickness}" wheel_mass="${wheel_mass}" wheel_velocity="${wheel_velocity}" velocity_effort="${velocity_effort}"/>
+
+	<xacro:imu parent_link="$(arg parent_name)"/>
+	<xacro:gps parent_link="$(arg parent_name)"/>
+	<xacro:kinect parent_link = "$(arg car_name)_link_front"/>
+	<!-- <xacro:kinect parent_link = "$(arg parent_name)"/> -->
+	<!-- <xacro:hokuyo parent_link = "$(arg car_name)_link_front"/> -->
+	<!-- <xacro:hokuyo parent_link = "$(arg car_name)_link_0"/> -->
+	<xacro:hokuyo parent_link = "$(arg parent_name)"/>
+
+	<gazebo>
+      	<plugin name="ackermansteer" filename="libackermannsteer.so">
+       		<debug>false</debug>
+         	<!-- * <commandTopic>rc1/spacenav/twist</commandTopic> -->
+         	<commandTopic>cmd_vel</commandTopic>
+         	<odometryTopic>odom</odometryTopic>
+         	<odometryFrame>$(arg parent_name)</odometryFrame>
+         	<rosDebugLevel>na</rosDebugLevel>
+         	<publishWheelJointState>false</publishWheelJointState>
+         	<drive_init_velocity>false</drive_init_velocity>
+       
+         	<robotBaseFrame>$(arg parent_name)</robotBaseFrame>
+         	<publishWheelTF>false</publishWheelTF>
+         	<publishOdomTF>true</publishOdomTF>
+         	<wheelDiameter>${wheel_dia}</wheelDiameter>
+         	<wheelAcceleration>0.02</wheelAcceleration>
+         	<wheelTorque>5.0</wheelTorque>
+         	<updateRate>100.0</updateRate>
+
+       
+         	<wheelbase>${wheel_base}</wheelbase>
+         	<wheelSeparation>${wheel_seperation}</wheelSeparation>
+         
+       
+         	<FR_steerJoint>$(arg car_name)_link_front_hing_right_joint</FR_steerJoint>
+         	<FR_driveJoint>$(arg car_name)_fr_wheel_joint</FR_driveJoint>
+         	<FL_steerJoint>$(arg car_name)_link_front_hing_left_joint</FL_steerJoint>
+         	<FL_driveJoint>$(arg car_name)_fl_wheel_joint</FL_driveJoint>
+         	<RL_steerJoint>$(arg car_name)_link_back_hing_left_joint</RL_steerJoint>
+         	<RL_driveJoint>$(arg car_name)_bl_wheel_joint</RL_driveJoint>
+         	<RR_steerJoint>$(arg car_name)_link_back_hing_right_joint</RR_steerJoint>
+         	<RR_driveJoint>$(arg car_name)_br_wheel_joint</RR_driveJoint>
+
+
+     
+         	<drive_p>5.0</drive_p>
+         	<drive_i>0.0</drive_i>
+         	<drive_d>0.0</drive_d>
+         	<drive_imax>1.0</drive_imax>
+         	<drive_imin>-1.0</drive_imin>
+         	<drive_max_effort>${velocity_effort}</drive_max_effort>
+
+  
+         	<steer_p>5.0</steer_p>
+         	<steer_i>0.0</steer_i>
+         	<steer_d>0.0</steer_d>
+         	<steer_imax>5.0</steer_imax>
+         	<steer_imin>-5.0</steer_imin>
+         	<steer_max_effort>${steer_effort}</steer_max_effort>
+         	<steer_init_angle>0.3</steer_init_angle>
+      	</plugin>
+    </gazebo>
+
+
+</robot>

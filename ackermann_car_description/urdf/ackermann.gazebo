@@ -1,0 +1,56 @@
+<robot name="ackermann" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<gazebo>
+      <plugin name="ackermansteer" filename="libackermansteer.so">
+         <debug>false</debug>
+         <commandTopic>cmd_vel</commandTopic>
+         <odometryTopic>odom</odometryTopic>
+         <robotBaseFrame>${parent_name}</robotBaseFrame>
+         <publishWheelTF>false</publishWheelTF>
+         <publishOdomTF>true</publishOdomTF>
+         <wheelDiameter>${wheel_dia}</wheelDiameter>
+         <wheelAcceleration>0.0</wheelAcceleration>
+         <wheelTorque>5.0</wheelTorque>
+         <updateRate>100.0</updateRate>
+
+         <!-- Wheel Placement -->
+         <wheelbase>${wheel_base}</wheelbase>
+         <wheelSeparation>${wheel_seperation}</wheelSeparation>
+         
+         <!-- Wheel Joints -->
+         <FR_steerJoint>${car_name}_link_front_hing_right</FR_steerJoint>
+         <FR_driveJoint>${car_name}_fr_wheel_joint</FR_driveJoint>
+         <FL_steerJoint>${car_name}_link_front_hing_left</FL_steerJoint>
+         <FL_driveJoint>${car_name}_fl_wheel_joint</FL_driveJoint>
+         <RL_steerJoint>${car_name}_link_back_hing_left</RL_steerJoint>
+         <RL_driveJoint>${car_name}_bl_wheel_joint</RL_driveJoint>
+         <RR_steerJoint>${car_name}_link_back_hing_right</RR_steerJoint>
+         <RR_driveJoint>${car_name}_br_wheel_joint</RR_driveJoint>
+
+         <!--PID settings - - - - - - - - - - - - - - - - - - - -
+              p      -    proportional gain
+              i      -    intergral gain
+              d      -    derivative gain
+              imax   -    anti windup max
+              imin   -    anti windup min
+         - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+         <!-- Wheel Velocity PID settings -->
+         <drive_p>5.0</drive_p>
+         <drive_i>0.01</drive_i>
+         <drive_d>0.01</drive_d>
+         <drive_imax>1.0</drive_imax>
+         <drive_imin>-1.0</drive_imin>
+         <drive_max_effort>${velocity_effort}</drive_max_effort>
+
+         <!-- Steering PID settings -->
+         <steer_p>5.0</steer_p>
+         <steer_i>5.0</steer_i>
+         <steer_d>0.11</steer_d>
+         <steer_imax>5.0</steer_imax>
+         <steer_imin>-5.0</steer_imin>
+         <steer_max_effort>${steer_effort}</steer_max_effort>
+         <steer_init_angle>0.3</steer_init_angle>
+
+      </plugin>
+    </gazebo>
+</xacro:macro>

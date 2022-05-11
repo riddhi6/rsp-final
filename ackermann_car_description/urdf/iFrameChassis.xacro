@@ -1,0 +1,140 @@
+<robot name="iFrame" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+	<xacro:macro name="iChassis" params="parent_name car_name wheel_base wheel_seperation chassis_thickness chassis_mass wheel_dia steer_limit steer_effort steer_velocity wheel_thickness wheel_mass wheel_velocity velocity_effort">
+
+		<xacro:include filename="$(find ackermann_car_description)/urdf/objects.xacro"/>
+		<xacro:include filename="$(find ackermann_car_description)/urdf/transmission.xacro"/>
+		<xacro:include filename="$(find ackermann_car_description)/urdf/wheel.xacro"/>
+
+		<xacro:chassislink link_name="${car_name}_link_0" length="${wheel_base - 2*chassis_thickness}" width="${chassis_thickness}" height="${chassis_thickness}" link_mass="${0.333*chassis_mass}"/>
+
+		<joint name="${car_name}_0" type="fixed">
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<parent link="${parent_name}" />
+			<child link="${car_name}_link_0"/>
+		</joint>
+
+		<gazebo reference="${car_name}_link_0">
+    		<material>Gazebo/SkyBlue</material>
+        </gazebo>
+
+		<xacro:chassislink link_name="${car_name}_link_front" length="${chassis_thickness}" width="${0.666*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.666*0.333*chassis_mass}"/>
+
+		<joint name="${car_name}_f1" type="fixed">
+			<origin xyz="${0.5*wheel_base - 0.5*chassis_thickness} 0 ${-0.5*0.5* chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_0"/>
+			<child link="${car_name}_link_front"/>
+		</joint>
+
+		<gazebo reference="${car_name}_link_front">
+    		<material>Gazebo/SkyBlue</material>
+        </gazebo>
+
+		<xacro:chassislink link_name="${car_name}_link_front_hing_left" length="${chassis_thickness}" width="${0.5*0.334*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.5*0.334*0.333*chassis_mass}"/>
+		<joint name = "${car_name}_link_front_hing_left_joint" type="revolute">
+			<origin xyz="0 ${0.5*0.666*wheel_seperation} ${0.5*chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_front"/>
+			<child link="${car_name}_link_front_hing_left"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="${-steer_limit}" upper="${steer_limit}"  effort="${steer_effort}" velocity="${steer_velocity}"/>
+		</joint>
+		<xacro:transmission_def joint_name="${car_name}_link_front_hing_left_joint" hardware_interface="PositionJointInterface"/>
+		<!-- <xacro:transmission_def joint_name="${car_name}_link_front_hing_left_joint" hardware_interface="EffortJointInterface"/> -->
+
+		<gazebo reference="${car_name}_link_front_hing_left">
+    		<material>Gazebo/Black</material>
+        </gazebo>
+
+		<xacro:chassislink link_name="${car_name}_link_front_hing_right" length="${chassis_thickness}" width="${0.5*0.334*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.5*0.334*0.333*chassis_mass}"/>
+		<joint name = "${car_name}_link_front_hing_right_joint" type="revolute">
+			<origin xyz="0 ${-0.5*0.666*wheel_seperation} ${0.5*chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_front"/>
+			<child link="${car_name}_link_front_hing_right"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="${-steer_limit}" upper="${steer_limit}"  effort="${steer_effort}" velocity="${steer_velocity}"/>
+			<!-- <mimic joint="${car_name}_link_hing_left_joint"/> -->
+		</joint>
+		<xacro:transmission_def joint_name="${car_name}_link_front_hing_right_joint" hardware_interface="PositionJointInterface"/>
+		<!-- <xacro:transmission_def joint_name="${car_name}_link_front_hing_right_joint" hardware_interface="EffortJointInterface"/> -->
+
+		<gazebo reference="${car_name}_link_front_hing_right">
+    		<material>Gazebo/Black</material>
+        </gazebo>
+
+
+	
+		<xacro:chassislink link_name="${car_name}_link_back" length="${chassis_thickness}" width="${0.666*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.666*0.333*chassis_mass}"/>
+
+		<joint name="${car_name}_f2" type="fixed">
+			<origin xyz="${-0.5*wheel_base + 0.5*chassis_thickness} 0 ${-0.5*0.5* chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_0"/>
+			<child link="${car_name}_link_back"/>
+		</joint>
+
+		<gazebo reference="${car_name}_link_back">
+    		<material>Gazebo/SkyBlue</material>
+        </gazebo>
+
+		<xacro:chassislink link_name="${car_name}_link_back_hing_left" length="${chassis_thickness}" width="${0.5*0.334*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.5*0.334*0.333*chassis_mass}"/>
+		<joint name = "${car_name}_link_back_hing_left_joint" type="revolute">
+			<origin xyz="0 ${0.5*0.666*wheel_seperation} ${0.5*chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_back"/>
+			<child link="${car_name}_link_back_hing_left"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="${-steer_limit}" upper="${steer_limit}"  effort="${steer_effort}" velocity="${steer_velocity}"/>
+			<!-- <limit lower="0" upper="0"  effort="${steer_effort}" velocity="${steer_velocity}"/>  -->
+		</joint>
+		<xacro:transmission_def joint_name="${car_name}_link_back_hing_left_joint" hardware_interface="PositionJointInterface"/>
+		<!-- <xacro:transmission_def joint_name="${car_name}_link_back_hing_left_joint" hardware_interface="EffortJointInterface"/> -->
+
+		<gazebo reference="${car_name}_link_back_hing_left">
+    		<material>Gazebo/Black</material>
+        </gazebo>
+
+
+		<xacro:chassislink link_name="${car_name}_link_back_hing_right" length="${chassis_thickness}" width="${0.5*0.334*wheel_seperation}" height="${0.5*chassis_thickness}" link_mass="${0.5*0.334*0.333*chassis_mass}"/>
+		<joint name = "${car_name}_link_back_hing_right_joint" type="revolute">
+			<origin xyz="0 ${-0.5*0.666*wheel_seperation} ${0.5*chassis_thickness}" rpy="0 0 0"/>
+			<parent link="${car_name}_link_back"/>
+			<child link="${car_name}_link_back_hing_right"/>
+			<axis xyz="0 0 1"/>
+			<limit lower="${-steer_limit}" upper="${steer_limit}"  effort="${steer_effort}" velocity="${steer_velocity}"/>
+			<!-- <mimic joint="${car_name}_link_hing_left_joint"/> -->
+		</joint>
+		<xacro:transmission_def joint_name="${car_name}_link_back_hing_right_joint" hardware_interface="PositionJointInterface"/>
+		<!-- <xacro:transmission_def joint_name="${car_name}_link_back_hing_right_joint" hardware_interface="EffortJointInterface"/> -->
+
+		<gazebo reference="${car_name}_link_back_hing_right">
+    		<material>Gazebo/Black</material>
+        </gazebo>
+
+
+
+		<xacro:wheela parent_name="${car_name}_link_front_hing_left" wheel_name="${car_name}_fl_wheel" x_p="0.0" y_p="${1.05*0.5*0.334*wheel_seperation}" z_p="0.0" row="0.0" pitch="0.0" yaw="0.0" wheel_dia="${wheel_dia}" wheel_thickness="${wheel_thickness}" wheel_mass="${wheel_mass}" wheel_velocity="${wheel_velocity}" velocity_effort="${velocity_effort}"/>
+		<gazebo reference="${car_name}_fl_wheel">
+    		<material>Gazebo/Orange</material>
+        </gazebo>
+
+
+		<xacro:wheela parent_name="${car_name}_link_front_hing_right" wheel_name="${car_name}_fr_wheel" x_p="0.0" y_p="${-1.05*0.5*0.334*wheel_seperation}" z_p="0.0" row="0.0" pitch="0.0" yaw="0.0" wheel_dia="${wheel_dia}" wheel_thickness="${wheel_thickness}" wheel_mass="${wheel_mass}" wheel_velocity="${wheel_velocity}" velocity_effort="${velocity_effort}"/>
+		<gazebo reference="${car_name}_fr_wheel">
+    		<material>Gazebo/Orange</material>
+        </gazebo>
+
+		<xacro:wheela parent_name="${car_name}_link_back_hing_left" wheel_name="${car_name}_bl_wheel" x_p="0.0" y_p="${1.05*0.5*0.334*wheel_seperation}" z_p="0.0" row="0.0" pitch="0.0" yaw="0.0" wheel_dia="${wheel_dia}" wheel_thickness="${wheel_thickness}" wheel_mass="${wheel_mass}" wheel_velocity="${wheel_velocity}" velocity_effort="${velocity_effort}"/>
+		<gazebo reference="${car_name}_bl_wheel">
+    		<material>Gazebo/Orange</material>
+        </gazebo>
+
+
+		<xacro:wheela parent_name="${car_name}_link_back_hing_right" wheel_name="${car_name}_br_wheel" x_p="0.0" y_p="${-1.05*0.5*0.334*wheel_seperation}" z_p="0.0" row="0.0" pitch="0.0" yaw="0.0" wheel_dia="${wheel_dia}" wheel_thickness="${wheel_thickness}" wheel_mass="${wheel_mass}" wheel_velocity="${wheel_velocity}" velocity_effort="${velocity_effort}"/>
+		<gazebo reference="${car_name}_br_wheel">
+    		<material>Gazebo/Orange</material>
+        </gazebo>
+
+		
+
+	</xacro:macro>
+
+</robot>
