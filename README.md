@@ -1,2 +1,2 @@
 # rsp-final
-Path planning simulation with ackermann car
+mobile robot navigation simulation with an ackermann-drive RC car
