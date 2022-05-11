@@ -8,7 +8,7 @@ project(ackermann_ekf)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  robot_pose_ekf
+  #robot_pose_ekf
   roscpp
   gps_common
   robot_localization

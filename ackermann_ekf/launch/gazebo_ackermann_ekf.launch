@@ -1,6 +1,6 @@
 <launch>
     <!-- start ekf  -->
-    <node name="ackermann_ekf_node" pkg="robot_pose_ekf" type="robot_pose_ekf" 
+    <!-- <node name="ekf" pkg="robot_pose_ekf" type="robot_pose_ekf" 
             output="screen">
         <param name="output_frame" value="odom"/>
         <param name="freq" value="30.0"/>
@@ -10,19 +10,27 @@
         <param name="vo_used" value="false"/>
         <param name="debug" value="false"/>
         <param name="self_diagnose" value="false"/>            
+    </node> -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf" clear_params="true">
+        <rosparam command="load" file="$(find ackermann_ekf)/params/ekf.yaml" />
     </node>
+
     <!-- imu plugin publishes to imu_data so no change -->
     <!-- convert gps plugin to 3D odometery -->
     <node name="sim_gps_conv" pkg="gps_common" type="utm_odometry_node">
-        <remap from="odom" to="vo"/>
+        <remap from="odom" to="gps/odom"/>
         <remap from="fix" to="/navsat/fix" />
         <param name="rot_covariance" value="99999" />
         <param name="frame_id" value="base_footprint" />
     </node>    
     <!-- convert ekf odom to be relative to gazebo -->
-    <node name ="robot_odom_convert" pkg ="robot_localization" 
-        type ="navsat_transform_node" >
-        <remap from="odometry/filtered" to="ackermann_ekf_node/odom_combined"/>
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" clear_params="true">
+        <rosparam command="load" file="$(find robot_localization)/params/navsat_transform_template.yaml" />
+      <!-- Placeholders for input remapping. Set your topic names as the "to" values.
+      <remap from="imu/data" to=""/>
+      <remap from="odometry/filtered" to=""/>
+      <remap from="gps/fix" to=""/>
+      -->
     </node>
 
 </launch>
