@@ -122,11 +122,12 @@ odom0_twist_rejection_threshold: 1
 
 # Further input parameter examples
 odom1: odometry/gps
-odom1_config: [false, false, false
+odom1_config: [false,  false,  false,
                false, false, false,
                false, false, false,
                false, false, true,
                false, false, false]
+
 odom1_differential: false
 odom1_relative: true
 odom1_queue_size: 2
