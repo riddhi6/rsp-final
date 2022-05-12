@@ -19,12 +19,14 @@ For movement
 
 ### Gazebo Simulation Launch Files
 Use keyboard as teleop:
+
 `roslaunch ackermann_simulation key_simulation.launch`
 
 Make robot chase a ball:
+
 `roslaunch ackermann_simulation ball_simulation.launch`
 
-press enter in terminal
+press enter in main gazebo terminal for gazebo to start
 
 ### Gazebo Simulation Manual Start
 
