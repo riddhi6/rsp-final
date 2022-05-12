@@ -3,6 +3,7 @@ Mobile robot navigation simulation with an Ackermann-drive RC car.
 
 ## Description
 As opposed to the standard differential drive, Ackermann cars are controlled using steering angle and rear wheel velocity. The front axle of an Ackermann car is actuated by a servo to set the steering angle of the car. The rear axle is actuated by a throttle motor that corresponds to the rear wheel velocity. 
+![ackermann drive](https://www.researchgate.net/profile/Yahia-Miloud/publication/228464812/figure/fig2/AS:669530191851520@1536639845075/Ackerman-geometry-model-The-linear-speed-of-each-wheel-drive-is-expressed-as-a.png)
 
 ## Installation
 For Keyboard Control:
@@ -51,7 +52,7 @@ Terminal 4:
 
 ## Package Descriptions
 ### Ackermann Car Description
-Robot description for a mobile robot using ackermann-drive. 
+Robot description for a mobile robot using ackermann-drive. Due to the inherent complexities of an Ackermann drive, the simulated robot has not been modeled to exactly match the real mobile robot. The real robot includes four continuous wheel joints, two revolute hinge joints between the front wheels and bearing that mimic each other in the front axle and two fixed hinge joints on the rear axle. In contrast, the simulated robot is modeled as four continuous wheel joints with a revolute hinge joint between each wheel and axle bearing, all independent of each other to match the gazebo plugin described below. 
 
 ### Ackermann Plugin
 A model plugin used to simulate the ackermann drive mechanism of the robot in the Gazebo envrionment. The [original plugin](https://github.com/froohoo/ackermansteer) was heavily edited to work for Gazebo 9 and ROS-Melodic. The plugin requires the ackermann car to be modeled as a robot with four independent continuous wheel joints each connected to an independent revolute hinge joint. The plugin also includes a PID controller that obtains the true steering angle and wheel velocity of the car from Gazebo and compares those values to the desired steering angle and rear wheel velocity from the command velocity twist it's subscribed to. Using these target values, the plugin then sets the effort of each joint.
