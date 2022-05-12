@@ -29,6 +29,8 @@ sudo apt-get install ros-melodic-robot-localization
 ```
 mkdir -p catkin_ws/src
 cd ~/catkin_ws/src`
+catkin init
+cd src
 git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo 
 git clone https://github.com/riddhi6/rsp-final
 cd ..
