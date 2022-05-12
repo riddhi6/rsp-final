@@ -65,7 +65,7 @@ source devel/setup.bash
 rostopic echo odometry/filtered
 ```
 ### Move the Robot 
-In a new terminal launch use either option 1 or option 2 to move the robot. Option 1 allows you to teleop control the robot using your keyboard (press the indicated keys in the specified terminal). In option 2, if you position the white ball in the gazebo environment (using translated mode of the gazebo GUI) in the view of the mobile robot's camera, the robot will follow the ball. View the video provided for more instructions on how to use Option 2. 
+In a new terminal launch use either option 1 or option 2 to move the robot. Option 1 allows you to teleop control the robot using your keyboard (press the indicated keys in the specified terminal). In option 2, if you position the white ball in the gazebo environment (using translated mode of the gazebo GUI) in the view of the mobile robot's camera, the robot will follow the ball. View the gif provided for more instructions on how to use Option 2. 
 
 Terminal 4:
 ```
@@ -76,7 +76,7 @@ Option 1: `rosrun teleop_twist_keyboard teleop_twist_keyboard.py`
  
 Option 2: `roslaunch ball_chaser ball_chaser.launch`
 
-
+![ballchase](https://github.com/riddhi6/rsp-final/blob/main/docfiles/ballchase.gif)
 
 ### Gazebo Simulation Launch Files
 As an alternative, you can use one of the two provided launch files in the ackermann simulation package to replicate the prior detailed commands. 
