@@ -1,10 +1,22 @@
 # Ackermann Localization Simulation
 Mobile robot navigation simulation with an Ackermann-drive RC car. 
 
+## Members
+* Pranav Bajaj pbajaj8
+* Riddhi Gopal rgopal3
+
 ## Description
 This project provides a simulation in Gazebo of mobile robot localization with an Ackermann-drive based RC Car (RedCat Rampage). As opposed to differential drive, Ackermann cars are controlled using steering angle and rear wheel velocity. The front axle of an Ackermann car is positioned by a servo through a series of linkages to set the steering angle of the car. The wheels on the rear axle are actuated by a motor to set wheel velocity. 
 
 <img src="https://www.researchgate.net/profile/Jiri-Krejsa/publication/224184352/figure/fig2/AS:302837121732616@1449213404660/Ackermann-steering-principle.png" alt="Ackermann Drive" width="400"/>
+
+## Deliverables
+Simulation
+* Simulation of Ackermann RC Car model in a maze environment with Kalman Filter enabled localization that can be controlled by setting velocity via keyboard
+* Simulation Ackermann RC Car Model that follows a specific object detected by its camera 
+
+Hardware
+* Remote desktop controlled Ackermann RC Car with Kalman Filter enabled localization [NON FUNCTIONING]
 
 ## System Requirements
 
@@ -124,6 +136,25 @@ Package that uses the image data from the robot's kinect to chase a ball. When a
 
 ### Ackermann Simulation
 Package that contains all launch-files needed to run a full ackermann simulation with ball chasing or teleop keyboard control. 
+
+## Hardware
+The hardware component of this project is unusable due to multiple problems integrating non-functioning parts and version incompatibility between the new ROS-hosting controller and pre-existing outdated parts. 
+
+Unusable Components
+* APM2.5 Flight Controller
+  * no longer supported by ArduPilot and little to no documentation available
+  * does not work with any archived APM firmware available online
+
+Works Well Individually
+* Redcat Racing Rampage XBE with Futaba 7 channel radio and receiver
+  * RC car can easily be used via remote controller not via jetson nano pwm
+  * Car and its parts are no longer sold or listed on the website by the supplier 
+  * Documentation not easily available
+* RC Car Batteries and Voltage Step boards
+* Hokuyo UTM 30LX EW 
+* GPS module
+* Kinect camera
+* Jetson Nano (personal - not obtained through RSP)
 
 ## References
 * [Gazebo Ackermann Plugin](https://github.com/froohoo/ackermansteer)
