@@ -3,8 +3,9 @@ Mobile robot navigation simulation with an Ackermann-drive RC car.
 
 ## Description
 As opposed to the standard differential drive, Ackermann cars are controlled using steering angle and rear wheel velocity. The front axle of an Ackermann car is actuated by a servo to set the steering angle of the car. The rear axle is actuated by a throttle motor that corresponds to the rear wheel velocity. 
-<img src="https://www.researchgate.net/profile/Yahia-Miloud/publication/228464812/figure/fig2/AS:669530191851520@1536639845075/Ackerman-geometry-model-The-linear-speed-of-each-wheel-drive-is-expressed-as-a.png" alt="drawing" width="200"/>
-![ackermann drive](https://www.researchgate.net/profile/Yahia-Miloud/publication/228464812/figure/fig2/AS:669530191851520@1536639845075/Ackerman-geometry-model-The-linear-speed-of-each-wheel-drive-is-expressed-as-a.png)
+
+<img src="https://www.researchgate.net/profile/Jiri-Krejsa/publication/224184352/figure/fig2/AS:302837121732616@1449213404660/Ackermann-steering-principle.png" alt="Ackermann Drive" width="250"/>
+
 
 ## Installation
 For Keyboard Control:
