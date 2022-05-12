@@ -1,0 +1,14 @@
+<launch>
+    <arg name="ekf_topic" default = "odometry/filtered"/>
+    <include file="$(find ackermann_car_description)/launch/ackermannCar_startup.launch" />
+	<include file="$(find ackermann_ekf)/launch/gazebo_ackermann_ekf.launch" />
+
+    <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+        output="screen" 
+        launch-prefix="bash -c 'sleep 4.0; $0 $@' xterm -e"/>   
+
+    <node name="ekf_pub" pkg="rostopic" type="rostopic" output="screen" 
+        launch-prefix="bash -c 'sleep 4.0; $0 $@' xterm -e"
+        args="echo $(arg ekf_topic)"/>
+
+</launch>
