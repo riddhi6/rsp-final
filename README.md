@@ -129,7 +129,7 @@ Package that uses the image data from the robot's kinect to chase a ball. When a
 Package that contains all launch-files needed to run a full ackermann simulation with ball chasing or teleop keyboard control. 
 
 ## References
-* ackermannplugin
-* robot localization
-* udacity ball chasing 
+* [Gazebo Ackermann Plugin](https://github.com/froohoo/ackermansteer)
+* [robot localization](http://wiki.ros.org/robot_localization)
+* [udacity ball chasing](https://github.com/pranavbajaj/Robotics_Software_Engineer_Beta-Udacity-)
  
