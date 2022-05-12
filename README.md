@@ -9,15 +9,18 @@ As opposed to the standard differential drive, Ackermann cars are controlled usi
 
 ## Installation
 For Keyboard Control:
+
 `sudo apt-get install ros-melodic-teleop-twist-keyboard 
 `
-For sensors
+For sensor plugins
+
 `sudo apt-get install ros-melodic-gps-umd`
 `sudo apt-get install ros-melodic-gazebo-plugins`
 `cd src 
 git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo `
 
-For movement
+For localization
+
 `sudo apt-get install ros-melodic-navigation `
 `sudo apt-get install ros-melodic-robot-localization `
 
@@ -54,7 +57,11 @@ Terminal 4:
 
 ## Package Descriptions
 ### Ackermann Car Description
-Robot description for a mobile robot using ackermann-drive. Due to the inherent complexities of an Ackermann drive, the simulated robot has not been modeled to exactly match the real mobile robot. The real robot includes four continuous wheel joints, two revolute hinge joints between the front wheels and bearing that mimic each other in the front axle and two fixed hinge joints on the rear axle. In contrast, the simulated robot is modeled as four continuous wheel joints with a revolute hinge joint between each wheel and axle bearing, all independent of each other to match the gazebo plugin described below. The full robot_description with the robot and sensors integrated is uploaded from car.urdf.xacro
+Robot description for a mobile robot using ackermann-drive. Due to the inherent complexities of an Ackermann drive, the simulated robot has not been modeled to exactly match the real mobile robot. The real robot includes four continuous wheel joints, two revolute hinge joints between the front wheels and bearing that mimic each other in the front axle and two fixed hinge joints on the rear axle. In contrast, the simulated robot is modeled as four continuous wheel joints with a revolute hinge joint between each wheel and axle bearing, all independent of each other to match the gazebo plugin described below. 
+
+<img src="docsfiles/cartf.png" alt="Car in Rviz" width="400"/>
+
+The full robot_description with the robot and sensors integrated is uploaded from car.urdf.xacro. 
 
 URDF files include:
 * Car chassis
