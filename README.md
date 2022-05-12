@@ -59,7 +59,7 @@ Terminal 4:
 ### Ackermann Car Description
 Robot description for a mobile robot using ackermann-drive. Due to the inherent complexities of an Ackermann drive, the simulated robot has not been modeled to exactly match the real mobile robot. The real robot includes four continuous wheel joints, two revolute hinge joints between the front wheels and bearing that mimic each other in the front axle and two fixed hinge joints on the rear axle. In contrast, the simulated robot is modeled as four continuous wheel joints with a revolute hinge joint between each wheel and axle bearing, all independent of each other to match the gazebo plugin described below. 
 
-<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/cartf.png" alt="Car in Rviz" width="400"/>
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/cartf.png" alt="Car in Rviz" width="300"/>
 
 The full robot_description with the robot and sensors integrated is uploaded from car.urdf.xacro. 
 
@@ -73,15 +73,15 @@ URDF files include:
 * Hokuyo model with Gazebo plugin
 * Ackermann drive model plugin
 
-<img src = "https://github.com/riddhi6/rsp-final/blob/main/docfiles/rvizgazebo.png" alt="car sensors" width=400>
+<img src = "https://github.com/riddhi6/rsp-final/blob/main/docfiles/rvizgazebo.png" alt="car sensors" width=600>
 
 ### Ackermann Plugin
 Source code for the model plugin used to simulate the ackermann drive mechanism of the robot in the Gazebo envrionment. The [original plugin](https://github.com/froohoo/ackermansteer) was heavily edited to work for Gazebo 9 and ROS-Melodic. The plugin requires the ackermann car to be modeled as a robot with four independent continuous wheel joints each connected to an independent revolute hinge joint. The plugin also includes a PID controller that obtains the true steering angle and wheel velocity of the car from Gazebo and compares those values to the desired steering angle and rear wheel velocity from the command velocity twist it's subscribed to. Using these target values, the plugin then sets the effort of each joint.
 
 ### Ackermann EKF 
 Package that includes launch files and parameters needed to run Extended Kalman Filter for state estimation of the mobile robot location. The relevant nodes come from the [robot_localization package](http://wiki.ros.org/robot_localization). The EKF uses IMU data, gps data, and its own filtered state estimate via the navsat_transform_node to produce the estimate position and orientation. 
-<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf0.png" alt="ekf0" width = 300/>
-<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf1.png" alt="ekf1" width = 300/>
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf0.png" alt="ekf0" width = 600/>
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf1.png" alt="ekf1" width = 600/>
 
 ### Ball Chaser
 Package that uses the image data from the robot's kinect to chase a ball. When a ball is detected in the camera image, the robot command velocity will be set so that the mobile robot moves towards the ball. The ball can be set in the gazebo GUI environment using translate mode 
