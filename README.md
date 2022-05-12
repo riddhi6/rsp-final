@@ -6,8 +6,17 @@ This project provides a simulation in Gazebo of mobile robot localization with a
 
 <img src="https://www.researchgate.net/profile/Jiri-Krejsa/publication/224184352/figure/fig2/AS:302837121732616@1449213404660/Ackermann-steering-principle.png" alt="Ackermann Drive" width="400"/>
 
+## System Requirements
+
+Ubuntu 18.04 (Bionic Beaver)
+
+ROS Melodic 
+
+
 
 ## Installation
+This project was built on and intended for use with ROS-Melodic and Gazebo 9 (the default version of Gazebo that comes with Melodic). It is also dependent on multiple packages available that are not present in the default installation of ROS Melodic. 
+
 For Keyboard Control:
 
 `sudo apt-get install ros-melodic-teleop-twist-keyboard 
@@ -26,20 +35,35 @@ For sensor plugins
 For localization
 
 `sudo apt-get install ros-melodic-navigation `
+
 `sudo apt-get install ros-melodic-robot-localization `
+
+Project installation
+
+`cd src`
+
+`git clone https://github.com/riddhi6/rsp-final`
+
+`catkin build ackermann_simulation`
 
 ## Use 
 
 ### Gazebo Simulation Launch Files
 #### Teleop with keyboard
 
+Launch the Gazebo/Rviz simulation to control the mobile robot with teleop keyboard control in the relevant terminal and view the EKF state estimate of robot positon. 
+
 `roslaunch ackermann_simulation key_simulation.launch`
 
 #### Make robot chase a ball
 
+Launch the Gazebo/Rviz simulation. In gazebo, enter translate mode and use your mouse to pick up and move the white ball within sight of the mobile robot's kinect camera. The robot will then move towards the ball. In one of the xterm terminals you can view the EKF estimate of robot position. 
+
 `roslaunch ackermann_simulation ball_simulation.launch`
 
 ### Gazebo Simulation Manual Start
+
+These instructions replicate the provided launch files
 
 Terminal 1:
 
