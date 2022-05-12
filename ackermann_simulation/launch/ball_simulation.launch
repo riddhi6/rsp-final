@@ -1,11 +1,10 @@
 <launch>
     <arg name="ekf_topic" default = "odometry/filtered"/>
-    <include file="$(find ackermann_car_description)/launch/ackermannCar_start.launch" />
+    <include file="$(find ackermann_car_description)/launch/ackermannCar_startup.launch" />
 	<include file="$(find ball_chaser)/launch/ball_chaser.launch" />
 	<include file="$(find ackermann_ekf)/launch/gazebo_ackermann_ekf.launch" />
     <node name="ekf_pub" pkg="rostopic" type="rostopic" output="screen" 
-        launch-prefix="bash -c 'sleep 3.0; $0 $@' xterm -e"
+        launch-prefix="bash -c 'sleep 5.0; $0 $@' xterm -e"
         args="echo $(arg ekf_topic)"/>
-
 
 </launch>
