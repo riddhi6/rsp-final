@@ -1,4 +1,4 @@
-# rsp-final
+# Ackermann Localization Simulation
 Mobile robot navigation simulation with an Ackermann-drive RC car. 
 
 ## Description
@@ -8,78 +8,87 @@ This project provides a simulation in Gazebo of mobile robot localization with a
 
 ## System Requirements
 
-Ubuntu 18.04 (Bionic Beaver)
-
-ROS Melodic 
-
-
+* Ubuntu 18.04 (Bionic Beaver)
+* ROS Melodic 
 
 ## Installation
 This project was built on and intended for use with ROS-Melodic and Gazebo 9 (the default version of Gazebo that comes with Melodic). It is also dependent on multiple packages available that are not present in the default installation of ROS Melodic. 
 
-For Keyboard Control:
 
-`sudo apt-get install ros-melodic-teleop-twist-keyboard 
-`
-For sensor plugins
+### ROS  Dependencies
+
+```
+sudo apt-get install ros-melodic-teleop-twist-keyboard
+sudo apt-get install ros-melodic-gazebo-plugins
+sudo apt-get install ros-melodic-navigation 
+sudo apt-get install ros-melodic-gps-umd
+sudo apt-get install ros-melodic-robot-localization 
+```
+
+### Create a workspace
+```
+mkdir -p catkin_ws/src
+cd ~/catkin_ws/src`
+git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo 
+git clone https://github.com/riddhi6/rsp-final
+cd ..
+catkin build
+source devel/setup.bash
+```
+## Launching Packages 
+
+### Start the robot in the World
+
+Launch the ackermann mobile robot and world. 
+
+Terminal 1:
+```
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch ackermann_car_description ackermannCar_startup.launch
+```
+### Launch the Extended Kalman Filter Package for robot localization
+Terminal 2:
+```
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch ackermann_ekf gazebo_ackermann_ekf.launch
+```
+### View the estimated robot position in a new terminal.
+Terminal 3: 
+
+```
+cd ~/catkin_ws
+source devel/setup.bash
+rostopic echo odometry/filtered
+```
+### Move the Robot 
+In a new terminal launch use either option 1 or option 2 to move the robot. Option 1 allows you to teleop control the robot using your keyboard (press the indicated keys in the specified terminal). In option 2, if you position the white ball in the gazebo environment (using translated mode of the gazebo GUI) in the view of the mobile robot's camera, the robot will follow the ball. View the video provided for more instructions on how to use Option 2. 
+
+Terminal 4:
+```
+cd ~/catkin_ws
+source devel/setup.bash
+```
+Option 1: `rosrun teleop_twist_keyboard teleop_twist_keyboard.py`
+ 
+Option 2: `roslaunch ball_chaser ball_chaser.launch`
 
 
-`sudo apt-get install ros-melodic-gps-umd`
-
-`sudo apt-get install ros-melodic-gazebo-plugins`
-
-`cd src `
-
-`git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo `
-
-For localization
-
-`sudo apt-get install ros-melodic-navigation `
-
-`sudo apt-get install ros-melodic-robot-localization `
-
-Project installation
-
-`cd src`
-
-`git clone https://github.com/riddhi6/rsp-final`
-
-`catkin build ackermann_simulation`
-
-## Use 
 
 ### Gazebo Simulation Launch Files
-#### Teleop with keyboard
+As an alternative, you can use one of the two provided launch files in the ackermann simulation package to replicate the prior detailed commands. 
+#### Launch robot with keyboard teleop
 
 Launch the Gazebo/Rviz simulation to control the mobile robot with teleop keyboard control in the relevant terminal and view the EKF state estimate of robot positon. 
 
-`roslaunch ackermann_simulation key_simulation.launch`
+`roslaunch ackermann_simulation keyboard_control.launch`
 
-#### Make robot chase a ball
+#### Launch robot with ball chasing 
 
 Launch the Gazebo/Rviz simulation. In gazebo, enter translate mode and use your mouse to pick up and move the white ball within sight of the mobile robot's kinect camera. The robot will then move towards the ball. In one of the xterm terminals you can view the EKF estimate of robot position. 
 
-`roslaunch ackermann_simulation ball_simulation.launch`
-
-### Gazebo Simulation Manual Start
-
-These instructions replicate the provided launch files
-
-Terminal 1:
-
-``roslaunch ackermann_car_description ackermannCar_startup.launch``
-
-Terminal 2:
-
-``rosrun teleop_twist_keyboard teleop_twist_keyboard.py``
-or 
-`roslaunch ball_chaser ball_chaser.launch`
-
-Terminal 3:
-`roslaunch ackermann_ekf gazebo_ackermann_ekf.launch`
-
-Terminal 4:
-`rostopic echo odometry/filtered`
+`roslaunch ackermann_simulation follow_ball.launch`
 
 ## Package Descriptions
 ### Ackermann Car Description
@@ -117,4 +126,8 @@ Package that uses the image data from the robot's kinect to chase a ball. When a
 ### Ackermann Simulation
 Package that contains all launch-files needed to run a full ackermann simulation with ball chasing or teleop keyboard control. 
 
+## References
+* ackermannplugin
+* robot localization
+* udacity ball chasing 
  
