@@ -2,7 +2,7 @@
 Mobile robot navigation simulation with an Ackermann-drive RC car. 
 
 ## Description
-As opposed to the standard differential drive, Ackermann cars are controlled using steering angle and rear wheel velocity. The front axle of an Ackermann car is actuated by a servo to set the steering angle of the car. The rear axle is actuated by a throttle motor that corresponds to the rear wheel velocity. 
+This project provides a simulation in Gazebo of mobile robot localization with an Ackermann-drive based RC Car (RedCat Rampage). As opposed to differential drive, Ackermann cars are controlled using steering angle and rear wheel velocity. The front axle of an Ackermann car is positioned by a servo through a series of linkages to set the steering angle of the car. The wheels on the rear axle are actuated by a motor to set wheel velocity. 
 
 <img src="https://www.researchgate.net/profile/Jiri-Krejsa/publication/224184352/figure/fig2/AS:302837121732616@1449213404660/Ackermann-steering-principle.png" alt="Ackermann Drive" width="400"/>
 
@@ -14,10 +14,14 @@ For Keyboard Control:
 `
 For sensor plugins
 
+
 `sudo apt-get install ros-melodic-gps-umd`
+
 `sudo apt-get install ros-melodic-gazebo-plugins`
-`cd src 
-git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo `
+
+`cd src `
+
+`git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo `
 
 For localization
 
@@ -27,15 +31,13 @@ For localization
 ## Use 
 
 ### Gazebo Simulation Launch Files
-Use keyboard as teleop:
+#### Teleop with keyboard
 
 `roslaunch ackermann_simulation key_simulation.launch`
 
-Make robot chase a ball:
+#### Make robot chase a ball
 
 `roslaunch ackermann_simulation ball_simulation.launch`
-
-press enter in main gazebo terminal for gazebo to start
 
 ### Gazebo Simulation Manual Start
 
@@ -76,7 +78,7 @@ URDF files include:
 <img src = "https://github.com/riddhi6/rsp-final/blob/main/docfiles/rvizgazebo.png" alt="car sensors" width=600>
 
 ### Ackermann Plugin
-Source code for the model plugin used to simulate the ackermann drive mechanism of the robot in the Gazebo envrionment. The [original plugin](https://github.com/froohoo/ackermansteer) was heavily edited to work for Gazebo 9 and ROS-Melodic. The plugin requires the ackermann car to be modeled as a robot with four independent continuous wheel joints each connected to an independent revolute hinge joint. The plugin also includes a PID controller that obtains the true steering angle and wheel velocity of the car from Gazebo and compares those values to the desired steering angle and rear wheel velocity from the command velocity twist it's subscribed to. Using these target values, the plugin then sets the effort of each joint.
+Source code for the model plugin used to simulate the ackermann drive mechanism of the robot in the Gazebo envrionment. The [original plugin](https://github.com/froohoo/ackermansteer) was edited to work for Gazebo 9 and improve plugin performance. The plugin requires the ackermann car to be modeled as a robot with four independent continuous wheel joints each connected to an independent revolute hinge joint. The plugin also includes a PID controller that obtains the true steering angle and wheel velocity of the car from Gazebo and compares those values to the desired steering angle and rear wheel velocity from the x linear and z angular velocities from the twist it's subscribed to. Using these target values, the plugin then sets the effort of each joint.
 
 ### Ackermann EKF 
 Package that includes launch files and parameters needed to run Extended Kalman Filter for state estimation of the mobile robot location. The relevant nodes come from the [robot_localization package](http://wiki.ros.org/robot_localization). The EKF uses IMU data, gps data, and its own filtered state estimate via the navsat_transform_node to produce the estimate position and orientation. 
