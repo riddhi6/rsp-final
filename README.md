@@ -80,8 +80,8 @@ Source code for the model plugin used to simulate the ackermann drive mechanism 
 
 ### Ackermann EKF 
 Package that includes launch files and parameters needed to run Extended Kalman Filter for state estimation of the mobile robot location. The relevant nodes come from the [robot_localization package](http://wiki.ros.org/robot_localization). The EKF uses IMU data, gps data, and its own filtered state estimate via the navsat_transform_node to produce the estimate position and orientation. 
-<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf0.png" alt="ekf0" width = 600/>
-<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf1.png" alt="ekf1" width = 600/>
+
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf0.png" alt="ekf0" width = 400/><img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf1.png" alt="ekf1" width = 400/>
 
 ### Ball Chaser
 Package that uses the image data from the robot's kinect to chase a ball. When a ball is detected in the camera image, the robot command velocity will be set so that the mobile robot moves towards the ball. The ball can be set in the gazebo GUI environment using translate mode 
