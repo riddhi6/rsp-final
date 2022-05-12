@@ -16,20 +16,18 @@ This project was built on and intended for use with ROS-Melodic and Gazebo 9 (th
 
 
 ### ROS  Dependencies
-
 ```
+sudo apt-get install ros-melodic-joint-state-publisher-gui
 sudo apt-get install ros-melodic-teleop-twist-keyboard
 sudo apt-get install ros-melodic-gazebo-plugins
 sudo apt-get install ros-melodic-navigation 
 sudo apt-get install ros-melodic-gps-umd
 sudo apt-get install ros-melodic-robot-localization 
 ```
-
 ### Create a workspace
 ```
 mkdir -p catkin_ws/src
 cd ~/catkin_ws/src`
-catkin init
 cd src
 git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo 
 git clone https://github.com/riddhi6/rsp-final
