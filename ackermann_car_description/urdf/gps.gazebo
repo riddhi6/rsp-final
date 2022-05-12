@@ -24,7 +24,10 @@
 		      <topicName>/gps/fix</topicName>
 		      <velocityTopicName>/gps/vel</velocityTopicName>
 		      <gaussianNoise> 3.5376e-02 6e-02 0.0301 </gaussianNoise>
-		      <referenceLatitude>39.325341</referenceLatitude>
+		      <!-- <referenceLatitude>0</referenceLatitude> -->
+		      <!-- <referenceLongitude>0</referenceLongitude> -->
+		      <!-- <referenceAltitude>0</referenceAltitude> -->
+			  <referenceLatitude>39.325341</referenceLatitude>
 		      <referenceLongitude>-76.622410</referenceLongitude>
 		      <!--<referenceLatitude>33.324968</referenceLatitude>
 		      <referenceLongitude>-72.622141</referenceLongitude>
