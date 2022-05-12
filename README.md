@@ -84,7 +84,9 @@ Package that includes launch files and parameters needed to run Extended Kalman 
 <img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf0.png" alt="ekf0" width = 400/><img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ekf1.png" alt="ekf1" width = 400/>
 
 ### Ball Chaser
-Package that uses the image data from the robot's kinect to chase a ball. When a ball is detected in the camera image, the robot command velocity will be set so that the mobile robot moves towards the ball. The ball can be set in the gazebo GUI environment using translate mode 
+Package that uses the image data from the robot's kinect to chase a ball. When a ball is detected in the camera image, the robot command velocity will be set so that the mobile robot moves towards the ball. The ball can be set in the gazebo GUI environment using translate mode.
+
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ball0.png" width = 400/><img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/ball2.png" width = 400/>
 
 ### Ackermann Simulation
 Package that contains all launch-files needed to run a full ackermann simulation with ball chasing or teleop keyboard control. 
