@@ -59,7 +59,7 @@ Terminal 4:
 ### Ackermann Car Description
 Robot description for a mobile robot using ackermann-drive. Due to the inherent complexities of an Ackermann drive, the simulated robot has not been modeled to exactly match the real mobile robot. The real robot includes four continuous wheel joints, two revolute hinge joints between the front wheels and bearing that mimic each other in the front axle and two fixed hinge joints on the rear axle. In contrast, the simulated robot is modeled as four continuous wheel joints with a revolute hinge joint between each wheel and axle bearing, all independent of each other to match the gazebo plugin described below. 
 
-<img src="docsfiles/cartf.png" alt="Car in Rviz" width="400"/>
+<img src="https://github.com/riddhi6/rsp-final/blob/main/docfiles/cartf.png" alt="Car in Rviz" width="400"/>
 
 The full robot_description with the robot and sensors integrated is uploaded from car.urdf.xacro. 
 
